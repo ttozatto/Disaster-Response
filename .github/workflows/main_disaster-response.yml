@@ -31,7 +31,9 @@ jobs:
         run: pip install -r requirements.txt
         
       - name: Run app
-        run: flask run
+        run: |
+          set FLASK_APP="app/app.py"
+          flask run
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       
