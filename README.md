@@ -10,6 +10,6 @@
 
 2. Go to `app` directory: `cd app`
 
-3. Run your web app: `python run.py`
+3. Run your web app: `python app.py`
 
 4. Click the `PREVIEW` button to open the homepage
