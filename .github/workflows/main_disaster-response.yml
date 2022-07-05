@@ -32,7 +32,7 @@ jobs:
         
       - name: Run app
         run: |
-          FLASK_APP="app/app.py"
+          export FLASK_APP=app/app.py
           flask run
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
