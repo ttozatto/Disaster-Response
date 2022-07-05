@@ -2,10 +2,15 @@ import json
 import plotly
 import pandas as pd
 import sys
+import nltk
+
+nltk.download('omw-1.4')
+nltk.download('punkt')
+nltk.download('wordnet')
+nltk.download('stopwords')
 
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
-
 from flask import Flask
 from flask import render_template, request
 from plotly.graph_objs import Bar
@@ -125,7 +130,7 @@ def go():
 
 
 def main():
-    app.run(host='0.0.0.0', port=3000, debug=True)
+    app.run(host='0.0.0.0', port=80, debug=True)
 
 
 if __name__ == '__main__':

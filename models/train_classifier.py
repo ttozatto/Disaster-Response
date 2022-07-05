@@ -1,13 +1,6 @@
 import sys
 from sklearn.model_selection import train_test_split
 from utils import *
-import nltk
-
-
-nltk.download('omw-1.4')
-nltk.download('punkt')
-nltk.download('wordnet')
-nltk.download('stopwords')
 
 
 def main():
