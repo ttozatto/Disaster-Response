@@ -4,6 +4,9 @@ from sqlalchemy import create_engine
 
 
 def load_data(messages_filepath, categories_filepath):
+    """
+    Read csv files and merge them into a pandas DataFrame
+    """
     messages = pd.read_csv(messages_filepath, index_col=0)
     categories = pd.read_csv(categories_filepath, index_col=0)
     
@@ -11,6 +14,9 @@ def load_data(messages_filepath, categories_filepath):
     
 
 def clean_data(df):
+    """
+    Prepare the data, dropping useless characters and converting formats
+    """
     # print(df.head())
     categories = pd.DataFrame(df['categories'])
     messages = pd.DataFrame(df[['message', 'original', 'genre']])
@@ -33,6 +39,9 @@ def clean_data(df):
 
 
 def save_data(df, database_filename):
+    """
+    Saves a DataFrame in a SQL database
+    """
     engine = create_engine('sqlite:///{}'.format(database_filename))
     df.to_sql('messages', engine, index=False)  
 

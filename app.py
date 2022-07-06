@@ -20,6 +20,9 @@ from sqlalchemy import create_engine
 sys.path.append('models')
 
 def tokenize(text):
+    """
+    Tokenize and lemmatize texts and return the tokens as a list of words. 
+    """
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
 
@@ -46,7 +49,6 @@ model = joblib.load("models/classifier.pkl")
 def index():
     
     # extract data needed for visuals
-    # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
 
@@ -56,7 +58,6 @@ def index():
     # print(df.columns)
     
     # create visuals
-    # TODO: Below is an example - modify to create your own visuals
     graphs = [
         {
             'data': [

@@ -20,6 +20,9 @@ lemmatizer = WordNetLemmatizer()
 
 
 def load_data(database_filepath):
+    """
+    Loads a clean SQL database and return it as pandas Dataframes, ready to train
+    """
     engine = create_engine('sqlite:///{}'.format(database_filepath))
     df = pd.read_sql_table('messages', engine)
     X = df['message']
@@ -31,6 +34,9 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
+    """
+    Tokenize and lemmatize texts, returns clean lists
+    """
     text = re.sub(r"[^a-zA-Z0-9]", " ", text)
     tokens = word_tokenize(text)
     tokens = [t for t in tokens if t not in sw]
@@ -44,6 +50,9 @@ def tokenize(text):
 
 
 def build_model(n_jobs, cv):
+    """
+    Build a pipeline to prepare and train a dataset. Includes gridsearch
+    """
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
         ('tfidf', TfidfTransformer()),
@@ -65,6 +74,9 @@ def build_model(n_jobs, cv):
 
 
 def evaluate_model(model, X_test, y_test, category_names):
+    """
+    Test the model and print results.
+    """
     y_pred = model.predict(X_test)
     y_pred_df = pd.DataFrame(y_pred)
     y_pred_df.columns = category_names
@@ -77,5 +89,8 @@ def evaluate_model(model, X_test, y_test, category_names):
 
 
 def save_model(model, model_filepath):
+    """
+    Saves the trained model as a .pkl file
+    """
     with open(model_filepath, 'wb') as file:
         joblib.dump(model, file)
