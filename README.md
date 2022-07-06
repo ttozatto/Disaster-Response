@@ -23,10 +23,26 @@ The training data in this repository is imbalanced, it has many samples in some 
 
 ![image](https://user-images.githubusercontent.com/42552721/177623830-a09d3dc2-d381-408f-8bc1-73482c8aa131.png)
 
+### File Description:
+ - /data
+    - disaster_messages.csv - features for training and test data
+    - disaster_categories.csv - labels for training and test data
+    - DisasterRespose.db - cleaned SQL database made from the two files above
+    - process_data.py - python script to clean and save the data
+ - /models
+    - train_classifier.py - python script to train the ML classifier model
+    - utils.py - auxiliary functions used in the file above
+    - classifier.pkl - ML model
+ - /templates
+    - master.html - homepage
+    - go.html - classification results page
+ - app.py - web app structure using Flask
+
 
 ### Working example:
 I deployed an working example of this web app on: https://disaster-response.azurewebsites.net/
 (The app uses a free tier hosting, so it can be pretty slow and will probably be shut down at some point.
+
 
 ### Aknowledgements:
 I would like to pay my special regards to:
