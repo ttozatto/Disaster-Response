@@ -1,6 +1,7 @@
 import sys
 import pandas as pd
 from sqlalchemy import create_engine
+import IPython
 
 
 def load_data(messages_filepath, categories_filepath):
@@ -20,7 +21,7 @@ def clean_data(df):
     # print(df.head())
     categories = pd.DataFrame(df['categories'])
     messages = pd.DataFrame(df[['message', 'original', 'genre']])
-
+    
     categories = categories.apply(lambda x: x.str.split(";", expand=True).iloc[0], axis=1)
     row = categories.iloc[0]
     category_colnames = [x[:-2] for x in row]
@@ -33,8 +34,12 @@ def clean_data(df):
         # convert column from string to numeric
         categories[column] = categories[column].astype(int)
 
-    df = messages.merge(categories, on='id')
+    for i, c in enumerate(categories['related']):
+        if c==2:
+            categories['related'].iloc[i] = 0 #messages with related=2 are in another language, are incomplete or incomprehensible 
 
+    df = messages.merge(categories, on='id')
+    IPython.embed()
     return df.drop_duplicates()
 
 
